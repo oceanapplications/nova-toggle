@@ -1,8 +1,8 @@
-import ToggleButton from 'vue-js-toggle-button'
+import ToggleButton from "@vueform/toggle";
 
 Nova.booting((Vue, router) => {
-    Vue.use(ToggleButton)
-    Vue.component('index-nova-toggle', require('./components/IndexField'));
-    Vue.component('detail-nova-toggle', require('./components/DetailField'));
-    Vue.component('form-nova-toggle', require('./components/FormField'));
-})
+  Vue.use(ToggleButton);
+  Vue.component("index-nova-toggle", require("./components/IndexField").default);
+  Vue.component("detail-nova-toggle", require("./components/DetailField").default);
+  Vue.component("form-nova-toggle", require("./components/FormField").default);
+});

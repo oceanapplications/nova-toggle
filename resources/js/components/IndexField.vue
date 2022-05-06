@@ -4,7 +4,7 @@
             <toggle-button
                     :id="sanitizedName"
                     :name="sanitizedName"
-                    :value="value"
+                    v-model="value"
                     @change="toggle"
                     :labels="labelConfig"
                     :width="width"
