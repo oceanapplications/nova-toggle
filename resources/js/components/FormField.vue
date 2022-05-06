@@ -1,40 +1,34 @@
 <template>
-    <default-field :field="field" :errors="errors" :show-help-text="showHelpText">
-        <template slot="field">
+    <DefaultField :field="field" :errors="errors" :show-help-text="showHelpText">
+        <template #field>
             <div class="py-2">
-                <toggle-button
-                    :id="sanitizedName"
-                    :name="sanitizedName"
+                <Toggle
                     v-model="value"
                     @change="toggle"
-                    :labels="labelConfig"
-                    :dusk="sanitizedName"
-                    :width="width"
-                    :height="height"
-                    :sync="true"
-                    :color="colors"
-                    :speed="speed"
+                    class="toggle-blue"
                 />
             </div>
-
             <p v-if="hasError" class="my-2 text-danger" v-html="firstError" />
         </template>
-    </default-field>
+    </DefaultField>
 </template>
 
 <script>
+import Toggle from "@vueform/toggle";
 import { Errors, FormField, HandlesValidationErrors } from 'laravel-nova'
 
 export default {
     mixins: [HandlesValidationErrors, FormField],
-
+    components: {
+      Toggle,
+    },
     data: () => ({
         value: false,
     }),
 
     mounted() {
+        console.log(this.field.value);
         this.value = this.field.value || false
-
         this.field.fill = formData => {
             formData.append(this.field.attribute, this.trueValue)
         }
@@ -42,7 +36,9 @@ export default {
 
     methods: {
         toggle() {
-            this.value = !this.value
+            console.log(this.value);
+            this.value = !this.trueValue;
+            console.log(this.value);
         },
     },
 
@@ -100,3 +96,4 @@ export default {
     },
 }
 </script>
+<style src="@vueform/toggle/themes/default.css"></style>

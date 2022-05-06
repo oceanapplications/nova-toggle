@@ -1,17 +1,10 @@
 <template>
     <div class="text-center">
         <div v-if="editableIndex">
-            <toggle-button
-                    :id="sanitizedName"
-                    :name="sanitizedName"
+            <Toggle
                     v-model="value"
                     @change="toggle"
-                    :labels="labelConfig"
-                    :width="width"
-                    :height="height"
-                    :sync="true"
-                    :color="colors"
-                    :speed="speed"
+                    class="toggle-blue"
                 />
         </div>
         <span v-else
@@ -23,9 +16,12 @@
 </template>
 
 <script>
+import Toggle from "@vueform/toggle";
 export default {
     props: ['resourceName', 'field'],
-
+    components: {
+      Toggle,
+    },
     data: () => ({
         value: false,
     }),
@@ -95,3 +91,4 @@ export default {
     },
 }
 </script>
+<style src="@vueform/toggle/themes/default.css"></style>
