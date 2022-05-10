@@ -4,7 +4,6 @@
             <div class="py-2">
                 <Toggle
                     v-model="value"
-                    @change="toggle"
                     class="toggle-blue"
                 />
             </div>
@@ -27,7 +26,6 @@ export default {
     }),
 
     mounted() {
-        console.log(this.field.value);
         this.value = this.field.value || false
         this.field.fill = formData => {
             formData.append(this.field.attribute, this.trueValue)
@@ -35,11 +33,6 @@ export default {
     },
 
     methods: {
-        toggle() {
-            console.log(this.value);
-            this.value = !this.trueValue;
-            console.log(this.value);
-        },
     },
 
     computed: {

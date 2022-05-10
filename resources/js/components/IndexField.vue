@@ -32,7 +32,6 @@ export default {
 
     methods: {
         toggle() {
-            this.value = !this.value
             Nova.request().post('/nova-vendor/nova-toggle/toggle/' + this.resourceName, {
               value: this.value,
               fieldName: this.field.attribute,
