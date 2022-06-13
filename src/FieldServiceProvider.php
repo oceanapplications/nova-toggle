@@ -1,6 +1,6 @@
 <?php
 
-namespace Davidpiesse\NovaToggle;
+namespace Oceanapplications\NovaToggle;
 
 use Laravel\Nova\Nova;
 use Laravel\Nova\Events\ServingNova;
@@ -21,13 +21,13 @@ class FieldServiceProvider extends ServiceProvider
             Nova::script('nova-toggle', __DIR__.'/../dist/js/field.js');
             Nova::style('nova-toggle', __DIR__.'/../dist/css/field.css');
         });
-    
+
         $this->app->booted(function () {
             $this->routes();
         });
     }
-    
-    
+
+
     /**
      * Register the tool's routes.
      *
@@ -38,7 +38,7 @@ class FieldServiceProvider extends ServiceProvider
         if ($this->app->routesAreCached()) {
             return;
         }
-        
+
         Route::middleware('nova')
             ->post('nova-vendor/nova-toggle/toggle/{resource}', [ApiController::class, 'index']);
     }

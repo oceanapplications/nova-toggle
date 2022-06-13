@@ -1,31 +1,46 @@
 <template>
-    <panel-item :field="field">
-        <p slot="value" class="text-90">
-            <span
-                class="inline-block rounded-full w-4 h-4 mr-1"
-                :class="{'bg-success': field.value, 'bg-danger': !field.value}"
+    <PanelItem :index="index" :field="field">
+        <template #value>
+            <input
+                :id="field.attribute"
+                type="checkbox"
+                class="form-toggle"
+                :class="errorClasses"
+                @click.stop
+                @change="toggle"
+                v-model="value"
             />
-            <span v-if="label != null">{{ label }}</span>
-        </p>
-    </panel-item>
+        </template>
+    </PanelItem>
 </template>
 
 <script>
 export default {
-    props: ['resource', 'resourceName', 'resourceId', 'field'],
+    props: ['index', 'resource', 'resourceName', 'resourceId', 'field'],
 
-    computed: {
-        trueLabel(){
-            return (this.field.true_label != undefined) ? this.field.true_label : null
-        },
+    data: () => ({
+        value: false,
+    }),
 
-        falseLabel(){
-            return (this.field.false_label != undefined) ? this.field.false_label : null
-        },
-
-        label() {
-            return this.field.value == true ? this.trueLabel : this.falseLabel
-        },
+    mounted() {
+        this.value = this.field.value || false
     },
+
+    methods: {
+        toggle() {
+            Nova.request().post('/nova-vendor/nova-toggle/toggle/' + this.resourceName, {
+                value: this.value,
+                fieldName: this.field.attribute,
+                pivot: this.field.pivot ?? false,
+                resourceId: this.resourceId,
+                viaResourceId: this.field.viaResourceId,
+                viaResource: this.field.viaResource
+            }).then((res) => {
+                if(!res.data.success) {
+                    Nova.error('Error Updating: ' + this.field.indexName);
+                }
+            })
+        },
+    }
 }
 </script>

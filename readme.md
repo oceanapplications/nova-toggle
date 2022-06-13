@@ -13,7 +13,7 @@ composer require davidpiesse/nova-toggle
 The Toggle has all the same options as the Boolean field so you can set the values to be stored in the Model.
 
 ```php
-use Davidpiesse\NovaToggle\Toggle;
+use Oceanapplications\NovaToggle\Toggle;
 ```
 
 ```php

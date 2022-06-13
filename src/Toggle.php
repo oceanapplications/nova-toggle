@@ -1,6 +1,6 @@
 <?php
 
-namespace Davidpiesse\NovaToggle;
+namespace Oceanapplications\NovaToggle;
 
 use Laravel\Nova\Fields\Boolean;
 
@@ -89,6 +89,16 @@ class Toggle extends Boolean
         return $this->withMeta([
             'speed' => $ms,
         ]);
+    }
+
+    public function inPivot($viaResource, $viaResourceId) {
+        if ($viaResource !== null && $viaResourceId !== null) {
+            return $this->withMeta([
+                'pivot' => true,
+                'viaResource' => $viaResource,
+                'viaResourceId' => $viaResourceId,
+            ]);
+        }
     }
 
 }

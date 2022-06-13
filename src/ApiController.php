@@ -1,6 +1,6 @@
 <?php
 
-namespace Davidpiesse\NovaToggle;
+namespace Oceanapplications\NovaToggle;
 
 use Illuminate\Http\Request;
 
@@ -11,16 +11,26 @@ class ApiController
         $resourceClass = $request->resource();
         $modelClass = $resourceClass::$model;
         $model = $modelClass::find($request->post('resourceId'));
-        
+
         if($model) {
+            if ($request->viaResourceId != null && $request->viaResource != null) {
+                 $related = $model->{$request->viaResource}()->find($request->viaResourceId);
+                 $related->pivot->{$request->post('fieldName')} = $request->post('value');
+                 $related->pivot->save();
+
+                return [
+                    'success' => true
+                ];
+            }
+
             $model->{$request->post('fieldName')} = $request->post('value');
             $model->save();
-            
+
             return [
                 'success' => true
             ];
         }
-    
+
         return [
             'success' => false
         ];
