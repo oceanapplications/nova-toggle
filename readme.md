@@ -76,3 +76,11 @@ You can activate the toggle on index as well with
 Toggle::make('Active')
     ->editableIndex()
 ```
+
+
+### Toggle value on pivot table
+Used when many to many relationship returns fields in the pivot table
+```php
+Toggle::make('Active')
+    ->inPivot($request->viaResource, $request->viaResourceId),
+```

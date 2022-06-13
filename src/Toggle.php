@@ -91,6 +91,11 @@ class Toggle extends Boolean
         ]);
     }
 
+    /**
+     * @param string $viaResource resource type
+     * @param string $viaResourceId resource id
+     * @return void
+     */
     public function inPivot($viaResource, $viaResourceId) {
         if ($viaResource !== null && $viaResourceId !== null) {
             return $this->withMeta([
