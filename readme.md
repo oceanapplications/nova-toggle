@@ -1,7 +1,7 @@
 # Toggle Field
 A drop in replacement for the default Boolean field
 
-![Toggle In Action](https://res.cloudinary.com/davidpiesse/image/upload/v1535317267/2018-08-26_21.59.30_s2bu39.gif)
+![Toggle In Action](https://i.imgur.com/cLB7kdW.gif)
 
 ## Installation
 Same as most other Nova Packages
